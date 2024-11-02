@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+#gif, #donationText, #messageText {
+    display: none; /* Hide by default */
+}
+
+#gif {
+    margin-bottom: 20px;
+    width: 200px; /* Adjust size as needed */
+}
+
+#donationText, #messageText {
+    font-size: 24px;
+    text-shadow: 2px 2px 4px black;
+}
