@@ -53,6 +53,7 @@ On line 33 put your userid
 const socket = new WebSocket('wss://stream.plsdonate.com/api/user/3277386681/websocket');
 // replace 3277386681 with your UserID
 ```
+**Put the index.html file inside your obs**
 
 # Credits
 [Roblox](https://www.roblox.com/users/3277386681/profile)
