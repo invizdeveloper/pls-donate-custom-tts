@@ -1,5 +1,6 @@
 # PLS DONATE Custom TTS popup
 Customisable version using the original API
+**Keep in mind that Hazem is already making a customisable version, this one gonna be maintained till the release**
 
 **FAQ**
 1. Is it allowed in PLS DONATE?
