@@ -61,7 +61,7 @@ async function processDonations() {
         await playAudio(tier.mp3Url);
 
         // Generate and play the TTS audio, then wait until it finishes
-        const ttsUrl = `https://tts-api.inviz.tech/tts?text=${encodeURIComponent(sender.displayName)}%20donated%20${amount}%20robux%20via%20PLEASE%20DONATE.%20${encodeURIComponent(sanitizedMessage)}`;
+        const ttsUrl = `https://pd.inviz.tech/tts?text=${encodeURIComponent(sender.displayName)}%20donated%20${amount}%20robux%20via%20PLEASE%20DONATE.%20${encodeURIComponent(sanitizedMessage)}`;
         await playAudio(ttsUrl);
 
         // Hide elements after both audio files have played
