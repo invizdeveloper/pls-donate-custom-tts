@@ -3,7 +3,9 @@ const messageText = document.getElementById("messageText");
 const gifElement = document.getElementById("gif");
 
 const donationQueue = [];
-const totalMinAmount = 1
+let processing = false; // Flag to track if donations are being processed
+const totalMinAmount = 1;
+
 // Tier configuration
 const tiers = [
     {
@@ -18,7 +20,7 @@ const tiers = [
         minAmount: 50,
         highlightColor: "cyan",
         gifUrl: "https://stream.plsdonate.com/donation.gif",
-        mp3Url: "https://stream.plsdonate.com/success.wav"
+        mp3Url: "dollar.mp3"
     },
     {
         name: "Tier 3",
@@ -35,10 +37,17 @@ const socket = new WebSocket('wss://stream.plsdonate.com/api/user/3277386681/web
 socket.onmessage = async (event) => {
     const donation = JSON.parse(event.data);
     donationQueue.push(donation);
-    processDonations();
+
+    // Start processing if not already running
+    if (!processing) {
+        processDonations();
+    }
 };
 
 async function processDonations() {
+    if (processing) return; // Prevent duplicate execution
+    processing = true; // Set flag
+
     while (donationQueue.length > 0) {
         const donation = donationQueue.shift();
         const { message, sender, amount } = donation;
@@ -51,7 +60,7 @@ async function processDonations() {
 
         // Set text, color, GIF, and show elements based on the tier
         donationText.innerHTML = `<span style="color: ${tier.highlightColor}; font-weight: bold;">@${sender.username}</span> donated <span style="color: ${tier.highlightColor}; font-weight: bold;">${amount} R$</span> via PLS DONATE`;
-        messageText.innerHTML = message;
+        messageText.innerHTML = sanitizedMessage;
         gifElement.src = tier.gifUrl;
         donationText.style.display = "block";
         messageText.style.display = "block";
@@ -69,8 +78,9 @@ async function processDonations() {
         messageText.style.display = "none";
         gifElement.style.display = "none";
     }
-}
 
+    processing = false; // Reset flag when done
+}
 
 // Helper function to play audio and return a promise that resolves when audio ends
 function playAudio(url) {
